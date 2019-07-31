@@ -2,7 +2,7 @@
   <div class="home">
     <Header/>
     <img alt="Vue logo" src="../assets/logo.png" id="img-logo">
-    <Body/>
+    <Body />
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 #img-logo{
   height: 300px;
   width: 300px

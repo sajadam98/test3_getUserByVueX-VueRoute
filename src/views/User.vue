@@ -6,7 +6,6 @@
     img-top
     title="User Information" 
     tag="article" 
-    style="max-width: 30rem;" 
     class="mb-2">
       <b-card-text>
           <div id="info-card">
@@ -19,38 +18,54 @@
           </div>
       </b-card-text>
 
-      <b-button href="#" variant="primary" id="btn-back">Back</b-button>
+      <b-button href="#" variant="primary" id="btn-back" @click="navigate">Back</b-button>
     </b-card>
   </div>
 </template>
 <script>
+import axios from 'axios'
 import { mapState } from "vuex";
+import router from '../router'
 var _ = require("lodash");
 
 export default {
   data() {
     return {
       user: {}
-    };
+    }
   },
   computed: {
     ...mapState(["users"])
   },
   mounted() {
-    const user = _.find(this.users, { id: parseInt(this.$route.params.id) });
-    this.user = user;
+    axios.get(
+        "https://sajadamiri-demo.herokuapp.com/api/users/" + this.$route.params.id)
+        .then(response => {
+          this.user = (response.data)[0]
+        })
+  },
+  methods: {
+    navigate () {
+      router.push({ name: 'users' })
+    }
   }
-};
+}
 </script>
-<style>
+<style scoped>
 .mb-2 {
-  margin: 15% 20%;
+  margin-top: 15%;
+  margin-right: 35%;
+  margin-left: 35%;
+  width: 30%
 }
 #titles {
     font-size: 20px;
+    margin-top: 20px
 }
 #values {
     color: blue;
+    font-size: 19px;
+    margin-top: 20px
 }
 #btn-back {
     margin-top: 25px;

@@ -26,11 +26,15 @@
 <script>
 export default {};
 </script>
-<style>
+<style scoped>
 #nav-title {
   font-size: 28px;
+  margin-left: 100px;
+  cursor: none
 }
 #show-btn {
   font-size: 22px;
+  margin-left: 30px;
+  cursor: pointer;
 }
 </style>

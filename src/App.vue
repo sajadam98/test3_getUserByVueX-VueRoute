@@ -1,19 +1,27 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/users">Users</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
 <script>
+import axios from 'axios'
+import { mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
+  methods: {
+    ...mapActions(["initialUsers"])
+  },
+  mounted(){
+    axios.get("https://sajadamiri-demo.herokuapp.com/api/users")
+      .then(response => {
+        this.initialUsers(response.data)
+      });
+  }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
